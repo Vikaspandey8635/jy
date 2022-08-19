@@ -1,0 +1,47 @@
+<!-- 
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <input type="text" placeholder="Enter S.N." name="sn" formControlName="sn" required><br>
+        <span style="color:red;" *ngIf="sn && sn.invalid && submitted">This Field is required</span>
+        <br>
+        <input type="text" placeholder="Enter Title" name="title" formControlName="title" required><br>
+        <span style="color:red;" *ngIf="title && title.invalid && submitted">This Field is required</span>
+        <br>
+        <input type="text" placeholder="Enter Price" name="price" formControlName="price"><br>
+        <span style="color:red;" *ngIf="price && price.invalid  && submitted">This Field is required</span>
+        <br>
+        <input  type="text" placeholder="Rating" formControlName="rating" isDisabled="true"><br>
+        <br>
+        <button type="submit" >Login</button>
+    </form>
+</div> -->
+
+
+<form #userForm="ngForm" (ngSubmit)="onSubmitForm()" >
+    <div>
+        <label>Title*</label>
+        <input type="text" placeholder="Enter S.N." name="title" [(ngModel)]="userDetails.title" #title="ngModel">
+        <div *ngIf="title && title.invalid && title.touched">
+            Please enter valid title name
+        </div>
+    </div>
+
+    <div>
+        <label>Price*</label>
+        <input type="text" placeholder="Enter S.N." name="price" [(ngModel)]="userDetails.price" #price="ngModel" [required]="userDetails.title" >
+        <div *ngIf="price && price.invalid  && price.touched">
+            Please enter valid price value
+        </div>
+        <div *ngIf="userDetails.title && !userDetails.price">
+            Price Value is now mandatory 
+        </div>
+    </div>
+
+    <div>
+        <button [ngClass]="userForm.invalid ? 'disable' : 'active' " [disabled]="userForm.invalid">
+            Submit
+        </button>
+    </div>
+
+
+</form>
